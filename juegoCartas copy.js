@@ -12,3 +12,36 @@ const generateCard = () => {
 };
 
 generateCard();
+
+const askToUser = () => {
+  let question = prompt("Crees que la carta es mayor o menor?");
+  if (question === "mayor" && myCard < secondCard) {
+    console.log("La carta que ha salido es de valor: " + secondCard);
+    console.log("Has ganado!");
+    playAgain();
+  } else if (question === "menor" && myCard < secondCard) {
+    console.log("La carta que ha salido es de valor: " + secondCard);
+    console.log("Has perdido!");
+    playAgain();
+  } else if (question === "mayor" && myCard > secondCard) {
+    console.log("La carta que ha salido es de valor: " + secondCard);
+    console.log("Has perdido!");
+    playAgain();
+  } else if (question === "menor" && myCard > secondCard) {
+    console.log("La carta que ha salido es de valor: " + secondCard);
+    console.log("Has ganado!");
+    playAgain();
+  }
+};
+
+const playAgain = () => {
+  let playOrNot = prompt("Quieres volver a jugar? si/no");
+  if (playOrNot === "" || playAgain === null) {
+    console.log("Escribe bine la respuesta por favor");
+    playAgain();
+  } else if (playOrNot.toLowerCase === "si") {
+    generateMyCard();
+  } else if (playOrNot.toLowerCase === "no") {
+    console.log("Adios");
+  }
+};

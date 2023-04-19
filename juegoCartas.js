@@ -33,48 +33,49 @@ introduceSticks("corazones");
 console.log(deck);
 let myCard;
 let secondCard;
+let generateMyCardOnHtml = document.querySelector(".button1");
+let generateGameCardOnHtml = document.querySelector(".button2");
+let higherButton = document.querySelector(".button3");
+let lowerButton = document.querySelector(".button4");
+let messageToUser = document.querySelector(".messageToUser");
+let winMessage = "Has ganado";
+let loseMessage = "Has perdido";
+
 const generateMyCard = () => {
-  let randomNumber = Math.floor(Math.random() * deck.length);
-  myCard = deck[randomNumber].value;
-  console.log(deck[randomNumber]);
-  generateGameCard();
-};
-const generateGameCard = () => {
-  let randomNumber2 = Math.floor(Math.random() * deck.length);
-  secondCard = deck[randomNumber2].value;
-  askToUser();
-};
-const askToUser = () => {
-  let question = prompt("Crees que la carta es mayor o menor?");
-  if (question === "mayor" && myCard < secondCard) {
-    console.log("La carta que ha salido es de valor: " + secondCard);
-    console.log("Has ganado!");
-    playAgain();
-  } else if (question === "menor" && myCard < secondCard) {
-    console.log("La carta que ha salido es de valor: " + secondCard);
-    console.log("Has perdido!");
-    playAgain();
-  } else if (question === "mayor" && myCard > secondCard) {
-    console.log("La carta que ha salido es de valor: " + secondCard);
-    console.log("Has perdido!");
-    playAgain();
-  } else if (question === "menor" && myCard > secondCard) {
-    console.log("La carta que ha salido es de valor: " + secondCard);
-    console.log("Has ganado!");
-    playAgain();
-  }
+  generateMyCardOnHtml.addEventListener("click", () => {
+    let randomNumber = Math.floor(Math.random() * deck.length);
+    myCard = deck[randomNumber].number;
+    return (document.querySelector(".insideCard1").textContent = myCard);
+  });
 };
 
-const playAgain = () => {
-  let playOrNot = prompt("Quieres volver a jugar? si/no");
-  if (playOrNot === "" || playAgain === null) {
-    console.log("Escribe bine la respuesta por favor");
-    playAgain();
-  } else if (playOrNot.toLowerCase === "si") {
-    generateMyCard();
-  } else if (playOrNot.toLowerCase === "no") {
-    console.log("Adios");
-  }
+const generateGameCard = () => {
+  generateGameCardOnHtml.addEventListener("click", () => {
+    let randomNumber2 = Math.floor(Math.random() * deck.length);
+    secondCard = deck[randomNumber2].number;
+    return (document.querySelector(".insideCard2").textContent = secondCard);
+  });
+};
+
+const checkCards = () => {
+  higherButton.addEventListener("click", () => {
+    if (myCard < secondCard) {
+      return (document.querySelector(".messageToUser").textContent =
+        winMessage);
+    } else if (myCard > secondCard) {
+      messageToUser = "Has ganado";
+    }
+  });
+
+  lowerButton.addEventListener("click", () => {
+    if (myCard < secondCard) {
+      messageToUser = "Has ganado";
+    } else if (myCard > secondCard) {
+      messageToUser = "Has perdido";
+    }
+  });
 };
 
 generateMyCard();
+generateGameCard();
+checkCards();
